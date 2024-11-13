@@ -28,18 +28,27 @@ import {
   Poha2Product,
   Poha3Product,
   Poha4Product,
+  Poha5Product,
+  Poha6Product,
+  Poha7Product,
   BexPromiseIcon,
   ShareIcon,
   HeartIcon,
+  HeartBlueIcon,
   RupeeSymbol,
   BexCoin,
+  BexPromiseIconLg,
+  RupeeBagIcon,
+  BexCoinLgIcon,
 } from '../IconsImages';
+
+import {ProductsArray, NewLanchArray} from './components/Constants';
 
 import ES from '../ES';
 import {useNavigation} from '@react-navigation/native';
 
 import {toggleLogin} from '../../../redux/action';
-import {ScrollView, TextInput} from 'react-native-gesture-handler';
+import {FlatList, ScrollView, TextInput} from 'react-native-gesture-handler';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -47,7 +56,10 @@ import Header from './components/Header';
 import Category from './components/Category';
 import Body from './components/Body';
 import Banner from './components/Banner';
-import TopDiscounts from './components/TopDiscounts';
+
+import Products from './components/Products';
+import ProductComponetHorizontal from './components/ProductComponetHorizontal';
+import ProductComponetVertical from './components/ProductComponetVertical';
 
 export default function Home({route}) {
   const [search, setSearch] = useState('');
@@ -56,6 +68,7 @@ export default function Home({route}) {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [originalData, setOriginalData] = useState([]);
+  const [renderKey, setRenderKey] = useState(0);
 
   const navigation = useNavigation();
   const name = route.params?.name;
@@ -80,15 +93,22 @@ export default function Home({route}) {
     console.log('seacrh value: ', searchValue);
   };
 
+  useEffect(() => {
+    console.log(ProductsArray);
+    setRenderKey(renderKey + 1);
+  }, [ProductsArray]);
+
   return (
     <ScrollView>
       <View style={[s.main]}>
-        <View style={[ES.w100, ES.h20]}>
+        
+        
+        <View style={[ES.w100, ES.h23]}>
           <Header handleSearch={handleSearch} />
         </View>
 
         <View style={[s.container]}>
-          <View style={[ES.w100, ES.h15, ES.borderDanger]}>
+          <View style={[ES.w100, ES.h15]}>
             <Category />
           </View>
 
@@ -98,113 +118,101 @@ export default function Home({route}) {
             </View>
           </View>
 
-          <View style={[{backgroundColor: '#EBF0F6'}, ES.w100, ES.py2]}>
-            <View style={[ES.bgLight, ES.w50, ES.bRadius5, ES.shadow1,ES.py1]}>
-              <View>
-                <View style={[ES.relative]}>
-                  <View
-                    style={[ES.absolute, ES.left0, ES.z1, ES.ps06, ES.pt06]}>
-                    <Image
-                      source={BexPromiseIcon}
-                      style={{width: 64, height: 19}}
-                    />
+          <View style={[ES.h33,  ES.w100,ES.py06]}>
+            <View style={[ ES.h100]}>
+              <View style={[ES.fx3, ES.centerItems]}>
+                <View
+                  style={[
+                    ES.h80,
+                    ES.bgLightGreen,
+                    ES.w92,
+                    ES.bRadius5,
+                    ES.flexRow,
+                    ES.centerItems,
+                    ES.gap4,
+                  ]}>
+                  <View style={[]}>
+                    <Image source={RupeeBagIcon} style={[]} />
                   </View>
-
-                  <View
-                    style={[ES.absolute, ES.right0, ES.z1, ES.pe06, ES.pt06]}>
-                    <Image source={ShareIcon} style={{width: 34, height: 34}} />
-                  </View>
-
-                  <View
-                    style={[
-                      ES.absolute,
-                      ES.right0,
-                      ES.top50,
-                      ES.z10,
-                      ES.pe06,
-                      ES.pt06,
-                    ]}>
-                    <Image source={HeartIcon} style={{width: 24, height: 24}} />
-                  </View>
-
-                  <View
-                    style={[
-                      ES.fx0,
-                      ES.justifyContentCenter,
-                      ES.alignItemsCenter,
-                      ES.p1,
-                    ]}>
-                    <Image
-                      source={Poha1Product}
-                      style={{width: 130, height: 130}}
-                    />
-                  </View>
-                </View>
-
-                <View style={[ES.fx0, ES.alignItemsCenter]}>
-                  <View style={[ES.px1, ES.w100]}>
-                    <Text
-                      style={[
-                        ES.f14,
-                        ES.fwM,
-                        ES.productTitleColor,
-                        ES.textJustify,
-                        ES.letterSpace1,
-                      ]}>
-                      <Text>Namaste Chai - Instant Poha</Text>
+                  <View style={[]}>
+                    <Text style={[ES.fwSB, ES.f18, ES.textLight]}>
+                      {' '}
+                      Total Savings:{' '}
                     </Text>
                   </View>
-                  <View style={[ES.flexRow, ES.px1]}>
-                    <View style={[ES.fx1, ES.flexRow, ES.gap1]}>
-                      <View style={[]}>
-                        <Text style={[ES.f18, ES.fwM, ES.productTitleColor]}>
-                          RS350
-                        </Text>
-                      </View>
-                      <View
-                        style={[
-                          ES.lineThrough,
-                          ES.f10,
-                          ES.fx0,
-                          ES.justifyContentEnd,
-                        ]}>
-                        <Text>RS500</Text>
-                      </View>
-                    </View>
+                  <View style={[]}>
+                    <Text style={[ES.fwSB, ES.f20, ES.textLight]}> ₹3500</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={[ES.fx4,ES.alignItemsCenter]}>
+              <View style={[ ES.flexRow,ES.h100,ES.w92,ES.justifyContentCenter]}>
+                <View style={[ES.fx1, ES.py1,]}>
+                  <View style={[ES.w95,ES.h98, ES.bRadius5, ES.bgBlue]}>
+                    <View style={[ES.fx1, ES.p02, ES.centerItems]}>
+                      <Text style={[ES.textCenter, ES.f12, ES.textLight]}>
+                        Don’t Just Collect
+                      </Text>
 
-                    <View
-                      style={[
-                        ES.fx1,
-                        ES.justifyContentEnd,
-                        ES.f10,
-                        ES.alignItemsEnd,
-                      ]}>
-                      <Text style={[ES.textEnd,{color:'#25D366'},ES.fwB]}>50.00% OFF</Text>
+                      <Text style={[ES.textCenter, ES.f12, ES.textLight]}>
+                        Buy With BEX Coins
+                      </Text>
+                    </View>
+                    <View style={[ES.fx1, ES.centerItems]}>
+                      <Image source={BexCoinLgIcon} />
                     </View>
                   </View>
+                </View>
+                <View style={[ES.fx1, ES.py1,ES.alignItemsEnd]}>
+                  <View style={[ES.w95,ES.h98, ES.bRadius5, ES.bgDarkGreen]}>
+                    <View style={[ES.fx1, ES.p02, ES.centerItems]}>
+                      <Text style={[ES.textCenter, ES.f12, ES.textLight]}>
+                        Get Lowest Prices
+                      </Text>
 
-                  <View style={[ES.flexRow,ES.w100]}>
-                    <View style={[ES.fx1,ES.flexRow,ES.justifyContentCenter,ES.gap1]}>
-                        <Image source={RupeeSymbol} />
-                        <View style={[]}>
-                          <Text style={[ES.textGreen]}> rs14.84 </Text>
-                        </View>
-
+                      <Text style={[ES.textCenter, ES.f12, ES.textLight]}>
+                        In The Market With
+                      </Text>
                     </View>
-                    <View style={[ES.fx1,ES.flexRow,ES.justifyContentCenter,ES.gap1]}>
-                    <Image source={BexCoin} />
-                    <View style={[]}>
-                          <Text style={[ES.textGreen]}> 150 </Text>
-                        </View>
+                    <View style={[ES.fx1, ES.centerItems]}>
+                      <Image source={BexPromiseIconLg} />
                     </View>
                   </View>
                 </View>
               </View>
+              </View>
+            </View>
+          </View>
+
+          <View style={[]}>
+            <ProductComponetHorizontal product={NewLanchArray[0]} />
+          </View>
+
+          <View style={[{backgroundColor: '#EBF0F6'}, ES.w100, ES.pb2]}>
+            <View style={[ES.fx0, ES.py1]}>
+              <Text style={[ES.f20, ES.fwB, ES.textCenter, ES.textBlue]}>
+                Top Discounts
+              </Text>
+            </View>
+
+            <View
+              style={[
+                ES.w100,
+                ES.fx0,
+                ES.flexRow,
+                ES.flexWrap,
+                ES.justifyContentCenter,
+                ES.gap1,
+              ]}>
+              <ProductComponetVertical product={ProductsArray[0]} />
+              <ProductComponetVertical product={ProductsArray[1]} />
+              <ProductComponetVertical product={ProductsArray[2]} />
+              <ProductComponetVertical product={ProductsArray[3]} />
             </View>
           </View>
         </View>
 
-        <Button title="Log Out" onPress={() => handleLogout()} />
+        
       </View>
     </ScrollView>
   );
@@ -214,6 +222,7 @@ const s = StyleSheet.create({
   main: {
     width: '100%',
     height: screenHeight,
+    paddingBottom: 140,
   },
   container: {
     flex: 1,
@@ -221,3 +230,24 @@ const s = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+
+
+
+{/* 
+            <View style={[{backgroundColor: '#EBF0F6'}, ES.w100, ES.pb2]}>
+              <View style={[ES.fx0, ES.py1]}>
+                <Text style={[ES.f20, ES.fwB, ES.textCenter, ES.textBlue]}>
+                  Top Discounts
+               </Text>
+              </View>
+             <FlatList
+             
+                data={ProductsArray}
+                renderItem = {({item}) => <Products products={item} />}
+
+             
+              />
+          
+            </View>
+           */}
