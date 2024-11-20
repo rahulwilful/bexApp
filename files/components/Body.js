@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import ES from '../../ES'
+import ES from '../pages/ES'
 
 const Body = () => {
   return (

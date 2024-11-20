@@ -1,6 +1,11 @@
 import { combineReducers } from "redux";
-import { reducer } from "./reducer";
+import { reducer,categoryReducer,cartReducer, topDealsReducer, topSellerReducer, bannerReducer } from "./reducer";
 
 export default combineReducers({
-    reducer
+    auth:reducer,
+    category:categoryReducer,
+    cart:cartReducer,
+    topDeals:topDealsReducer,
+    topSellers:topSellerReducer,
+    banners:bannerReducer
 })

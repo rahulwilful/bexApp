@@ -14,6 +14,12 @@ const ES = StyleSheet.create({
     color:'#431A70'
   },
 
+  subHeadingText:{
+     color: '#451B6D',
+     fontSize:16,
+     fontWeight:'bold'
+
+  },
 
   textBlue: {
     color: '#6443AF',
@@ -29,15 +35,19 @@ const ES = StyleSheet.create({
   bgBlue: {
     backgroundColor: '#6443AF',
   },
+
   bgDarkGreen:{
     backgroundColor: '#008282',
   },
+
   bgLightGreen:{
     backgroundColor: '#25D366',
   },
+
   bgLightTea:{
     backgroundColor:'#FFEBD6'
   },
+
   bgGradientBlue:{
     backgroundImage: 'linear-gradient(90deg, #602A9A, #3F1869)',
   },
@@ -54,6 +64,11 @@ const ES = StyleSheet.create({
     display: 'none',
   },
 
+  textShadow:{
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 10
+  },
   
 
   /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
@@ -229,73 +244,611 @@ const ES = StyleSheet.create({
     left: 100,
   },
 
-  top0: {
-    top: 0,
+  top1: {
+    top: '1%',
+  },
+  top2: {
+    top: '2%',
+  },
+  top3: {
+    top: '3%',
+  },
+  top4: {
+    top: '4%',
+  },
+  top5: {
+    top: '5%',
+  },
+  top6: {
+    top: '6%',
+  },
+  top7: {
+    top: '7%',
+  },
+  top8: {
+    top: '8%',
+  },
+  top9: {
+    top: '9%',
   },
   top10: {
-    top: 10,
+    top: '10%',
+  },
+  top11: {
+    top: '11%',
+  },
+  top12: {
+    top: '12%',
+  },
+  top13: {
+    top: '13%',
+  },
+  top14: {
+    top: '14%',
+  },
+  top15: {
+    top: '15%',
+  },
+  top16: {
+    top: '16%',
+  },
+  top17: {
+    top: '17%',
+  },
+  top18: {
+    top: '18%',
+  },
+  top19: {
+    top: '19%',
   },
   top20: {
-    top: 20,
+    top: '20%',
+  },
+  top21: {
+    top: '21%',
+  },
+  top22: {
+    top: '22%',
+  },
+  top23: {
+    top: '23%',
+  },
+  top24: {
+    top: '24%',
+  },
+  top25: {
+    top: '25%',
+  },
+  top26: {
+    top: '26%',
+  },
+  top27: {
+    top: '27%',
+  },
+  top28: {
+    top: '28%',
+  },
+  top29: {
+    top: '29%',
   },
   top30: {
-    top: 30,
+    top: '30%',
+  },
+  top31: {
+    top: '31%',
+  },
+  top32: {
+    top: '32%',
+  },
+  top33: {
+    top: '33%',
+  },
+  top34: {
+    top: '34%',
+  },
+  top35: {
+    top: '35%',
+  },
+  top36: {
+    top: '36%',
+  },
+  top37: {
+    top: '37%',
+  },
+  top38: {
+    top: '38%',
+  },
+  top39: {
+    top: '39%',
   },
   top40: {
-    top: 40,
+    top: '40%',
+  },
+  top41: {
+    top: '41%',
+  },
+  top42: {
+    top: '42%',
+  },
+  top43: {
+    top: '43%',
+  },
+  top44: {
+    top: '44%',
+  },
+  top45: {
+    top: '45%',
+  },
+  top46: {
+    top: '46%',
+  },
+  top47: {
+    top: '47%',
+  },
+  top48: {
+    top: '48%',
+  },
+  top49: {
+    top: '49%',
   },
   top50: {
-    top: 50,
+    top: '50%',
+  },
+  top51: {
+    top: '51%',
+  },
+  top52: {
+    top: '52%',
+  },
+  top53: {
+    top: '53%',
+  },
+  top54: {
+    top: '54%',
+  },
+  top55: {
+    top: '55%',
+  },
+  top56: {
+    top: '56%',
+  },
+  top57: {
+    top: '57%',
+  },
+  top58: {
+    top: '58%',
+  },
+  top59: {
+    top: '59%',
   },
   top60: {
-    top: 60,
+    top: '60%',
+  },
+  top61: {
+    top: '61%',
+  },
+  top62: {
+    top: '62%',
+  },
+  top63: {
+    top: '63%',
+  },
+  top64: {
+    top: '64%',
+  },
+  top65: {
+    top: '65%',
+  },
+  top66: {
+    top: '66%',
+  },
+  top67: {
+    top: '67%',
+  },
+  top68: {
+    top: '68%',
+  },
+  top69: {
+    top: '69%',
   },
   top70: {
-    top: 70,
+    top: '70%',
+  },
+  top71: {
+    top: '71%',
+  },
+  top72: {
+    top: '72%',
+  },
+  top73: {
+    top: '73%',
+  },
+  top74: {
+    top: '74%',
+  },
+  top75: {
+    top: '75%',
+  },
+  top76: {
+    top: '76%',
+  },
+  top77: {
+    top: '77%',
+  },
+  top78: {
+    top: '78%',
+  },
+  top79: {
+    top: '79%',
   },
   top80: {
-    top: 80,
+    top: '80%',
+  },
+  top81: {
+    top: '81%',
+  },
+  top82: {
+    top: '82%',
+  },
+  top83: {
+    top: '83%',
+  },
+  top84: {
+    top: '84%',
+  },
+  top85: {
+    top: '85%',
+  },
+  top86: {
+    top: '86%',
+  },
+  top87: {
+    top: '87%',
+  },
+  top88: {
+    top: '88%',
+  },
+  top89: {
+    top: '89%',
   },
   top90: {
-    top: 90,
+    top: '90%',
+  },
+  top91: {
+    top: '91%',
+  },
+  top92: {
+    top: '92%',
+  },
+  top93: {
+    top: '93%',
+  },
+  top94: {
+    top: '94%',
+  },
+  top95: {
+    top: '95%',
+  },
+  top96: {
+    top: '96%',
+  },
+  top97: {
+    top: '97%',
+  },
+  top98: {
+    top: '98%',
+  },
+  top99: {
+    top: '99%',
   },
   top100: {
-    top: 100,
+    top: '100%',
   },
 
   bottom0: {
     bottom: 0,
   },
+  bottom1: {
+    bottom: '1%',
+  },
+  bottom2: {
+    bottom: '2%',
+  },
+  bottom3: {
+    bottom: '3%',
+  },
+  bottom4: {
+    bottom: '4%',
+  },
+  bottom5: {
+    bottom: '5%',
+  },
+  bottom6: {
+    bottom: '6%',
+  },
+  bottom7: {
+    bottom: '7%',
+  },
+  bottom8: {
+    bottom: '8%',
+  },
+  bottom9: {
+    bottom: '9%',
+  },
   bottom10: {
-    bottom: 10,
+    bottom: '10%',
+  },
+  bottom11: {
+    bottom: '11%',
+  },
+  bottom12: {
+    bottom: '12%',
+  },
+  bottom13: {
+    bottom: '13%',
+  },
+  bottom14: {
+    bottom: '14%',
+  },
+  bottom15: {
+    bottom: '15%',
+  },
+  bottom16: {
+    bottom: '16%',
+  },
+  bottom17: {
+    bottom: '17%',
+  },
+  bottom18: {
+    bottom: '18%',
+  },
+  bottom19: {
+    bottom: '19%',
   },
   bottom20: {
-    bottom: 20,
+    bottom: '20%',
+  },
+  bottom21: {
+    bottom: '21%',
+  },
+  bottom22: {
+    bottom: '22%',
+  },
+  bottom23: {
+    bottom: '23%',
+  },
+  bottom24: {
+    bottom: '24%',
+  },
+  bottom25: {
+    bottom: '25%',
+  },
+  bottom26: {
+    bottom: '26%',
+  },
+  bottom27: {
+    bottom: '27%',
+  },
+  bottom28: {
+    bottom: '28%',
+  },
+  bottom29: {
+    bottom: '29%',
   },
   bottom30: {
-    bottom: 30,
+    bottom: '30%',
+  },
+  bottom31: {
+    bottom: '31%',
+  },
+  bottom32: {
+    bottom: '32%',
+  },
+  bottom33: {
+    bottom: '33%',
+  },
+  bottom34: {
+    bottom: '34%',
+  },
+  bottom35: {
+    bottom: '35%',
+  },
+  bottom36: {
+    bottom: '36%',
+  },
+  bottom37: {
+    bottom: '37%',
+  },
+  bottom38: {
+    bottom: '38%',
+  },
+  bottom39: {
+    bottom: '39%',
   },
   bottom40: {
-    bottom: 40,
+    bottom: '40%',
+  },
+  bottom41: {
+    bottom: '41%',
+  },
+  bottom42: {
+    bottom: '42%',
+  },
+  bottom43: {
+    bottom: '43%',
+  },
+  bottom44: {
+    bottom: '44%',
+  },
+  bottom45: {
+    bottom: '45%',
+  },
+  bottom46: {
+    bottom: '46%',
+  },
+  bottom47: {
+    bottom: '47%',
+  },
+  bottom48: {
+    bottom: '48%',
+  },
+  bottom49: {
+    bottom: '49%',
   },
   bottom50: {
-    bottom: 50,
+    bottom: '50%',
+  },
+  bottom51: {
+    bottom: '51%',
+  },
+  bottom52: {
+    bottom: '52%',
+  },
+  bottom53: {
+    bottom: '53%',
+  },
+  bottom54: {
+    bottom: '54%',
+  },
+  bottom55: {
+    bottom: '55%',
+  },
+  bottom56: {
+    bottom: '56%',
+  },
+  bottom57: {
+    bottom: '57%',
+  },
+  bottom58: {
+    bottom: '58%',
+  },
+  bottom59: {
+    bottom: '59%',
   },
   bottom60: {
-    bottom: 60,
+    bottom: '60%',
+  },
+  bottom61: {
+    bottom: '61%',
+  },
+  bottom62: {
+    bottom: '62%',
+  },
+  bottom63: {
+    bottom: '63%',
+  },
+  bottom64: {
+    bottom: '64%',
+  },
+  bottom65: {
+    bottom: '65%',
+  },
+  bottom66: {
+    bottom: '66%',
+  },
+  bottom67: {
+    bottom: '67%',
+  },
+  bottom68: {
+    bottom: '68%',
+  },
+  bottom69: {
+    bottom: '69%',
   },
   bottom70: {
-    bottom: 70,
+    bottom: '70%',
+  },
+  bottom71: {
+    bottom: '71%',
+  },
+  bottom72: {
+    bottom: '72%',
+  },
+  bottom73: {
+    bottom: '73%',
+  },
+  bottom74: {
+    bottom: '74%',
+  },
+  bottom75: {
+    bottom: '75%',
+  },
+  bottom76: {
+    bottom: '76%',
+  },
+  bottom77: {
+    bottom: '77%',
+  },
+  bottom78: {
+    bottom: '78%',
+  },
+  bottom79: {
+    bottom: '79%',
   },
   bottom80: {
-    bottom: 80,
+    bottom: '80%',
+  },
+  bottom81: {
+    bottom: '81%',
+  },
+  bottom82: {
+    bottom: '82%',
+  },
+  bottom83: {
+    bottom: '83%',
+  },
+  bottom84: {
+    bottom: '84%',
+  },
+  bottom85: {
+    bottom: '85%',
+  },
+  bottom86: {
+    bottom: '86%',
+  },
+  bottom87: {
+    bottom: '87%',
+  },
+  bottom88: {
+    bottom: '88%',
+  },
+  bottom89: {
+    bottom: '89%',
   },
   bottom90: {
-    bottom: 90,
+    bottom: '90%',
+  },
+  bottom91: {
+    bottom: '91%',
+  },
+  bottom92: {
+    bottom: '92%',
+  },
+  bottom93: {
+    bottom: '93%',
+  },
+  bottom94: {
+    bottom: '94%',
+  },
+  bottom95: {
+    bottom: '95%',
+  },
+  bottom96: {
+    bottom: '96%',
+  },
+  bottom97: {
+    bottom: '97%',
+  },
+  bottom98: {
+    bottom: '98%',
+  },
+  bottom99: {
+    bottom: '99%',
   },
   bottom100: {
-    bottom: 100,
+    bottom: '100%',
   },
+  
     /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
   shadow1: {
@@ -365,8 +918,8 @@ const ES = StyleSheet.create({
     shadowColor: '#000', // Shadow color
     shadowOffset: {width: 0, height: 0}, // Offset in x and y directions
     shadowOpacity: 0.9, // Opacity of the shadow
-    shadowRadius: 9, // How blurred the shadow is
-    elevation: 10,
+    shadowRadius: 10, // How blurred the shadow is
+    elevation: 12,
   },
 
   /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
@@ -531,6 +1084,14 @@ const ES = StyleSheet.create({
     color: 'black',
   },
   /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+  tempBorder:{
+    borderWidth: 1,
+    borderColor: '#007bff',
+  },
+  tempBorder2:{
+    borderWidth: 1,
+    borderColor: '#dc3545',
+  },
   border1:{
     borderWidth: 1
   },
@@ -864,6 +1425,18 @@ const ES = StyleSheet.create({
     paddingBottom: 50,
   },
   /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+  m02: {
+    margin: 2,
+  },
+  m04: {
+    margin: 4,
+  },
+  m06: {
+    margin: 6,
+  },
+  m08: {
+    margin: 8,
+  },
   m1: {
     margin: 10,
   },
@@ -881,6 +1454,19 @@ const ES = StyleSheet.create({
   },
 
   // Margin X (Horizontal)
+  mx02: {
+    marginHorizontal: 2,
+  },
+  mx04: {
+    marginHorizontal: 4,
+  },
+  mx06: {
+    marginHorizontal: 6,
+  },
+  mx08: {
+    marginHorizontal: 8,
+  },
+
   mx1: {
     marginHorizontal: 10,
   },
@@ -898,6 +1484,19 @@ const ES = StyleSheet.create({
   },
 
   // Margin Y (Vertical)
+  my02: {
+    marginVertical: 2,
+  },
+  my04: {
+    marginVertical: 4,
+  },
+  my06: {
+    marginVertical: 6,
+  },
+  my08: {
+    marginVertical: 8,
+  },
+
   my1: {
     marginVertical: 10,
   },
@@ -915,6 +1514,19 @@ const ES = StyleSheet.create({
   },
 
   // Margin Start
+  ms02: {
+    marginStart: 2,
+  },
+  ms04: {
+    marginStart: 4,
+  },
+  ms06: {
+    marginStart: 6,
+  },
+  ms08: {
+    marginStart: 8,
+  },
+
   ms1: {
     marginStart: 10,
   },
@@ -932,6 +1544,19 @@ const ES = StyleSheet.create({
   },
 
   // Margin End
+  me02: {
+    marginEnd: 2,
+  },
+  me04: {
+    marginEnd: 4,
+  },
+  me06: {
+    marginEnd: 6,
+  },
+  me08: {
+    marginEnd: 8,
+  },
+
   me1: {
     marginEnd: 10,
   },
@@ -949,6 +1574,19 @@ const ES = StyleSheet.create({
   },
 
   // Margin Top
+  mt02: {
+    marginTop: 2,
+  },
+  mt04: {
+    marginTop: 4,
+  },
+  mt06: {
+    marginTop: 6,
+  },
+  mt08: {
+    marginTop: 8,
+  },
+
   mt1: {
     marginTop: 10,
   },
@@ -966,6 +1604,19 @@ const ES = StyleSheet.create({
   },
 
   // Margin Bottom
+ mb02: {
+    marginBottom: 2,
+  },
+ mb04: {
+    marginBottom: 4,
+  },
+ mb06: {
+    marginBottom: 6,
+  },
+ mb08: {
+    marginBottom: 8,
+  },
+
   mb1: {
     marginBottom: 10,
   },
@@ -1056,6 +1707,33 @@ const ES = StyleSheet.create({
   f24: {
     fontSize: 24,
   },
+
+  f26: {
+    fontSize: 26,
+  },
+  f28: {
+    fontSize: 28,
+  },
+  f30: {
+    fontSize: 30,
+  },
+  f32: {
+    fontSize: 32,
+  },
+  f34: {
+    fontSize: 34,
+  },
+  f36: {
+    fontSize: 36,
+  },
+  f38: {
+    fontSize: 38,
+  },
+  f40: {
+    fontSize: 40,
+  },
+
+
   /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
   gap1: {

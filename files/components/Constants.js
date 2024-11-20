@@ -17,7 +17,7 @@ import {
     RupeeSymbol,
     BexCoin,
 
- } from "../../IconsImages";
+ } from "../pages/IconsImages";
 
 
  export const ProductsArray = [
@@ -47,6 +47,14 @@ import {
     },
     {
         id: 4,
+        image: Poha4Product,
+        name: "Namaste Chai - Instant Poha 4",
+        price: 500,
+        discount: 300,
+        offPercent: 45.00   
+    },
+    {
+        id: 5,
         image: Poha4Product,
         name: "Namaste Chai - Instant Poha 4",
         price: 500,

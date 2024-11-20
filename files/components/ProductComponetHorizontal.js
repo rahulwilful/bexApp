@@ -1,5 +1,5 @@
 import { View, Text,Image } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 import { 
@@ -21,42 +21,74 @@ import {
   HeartBlueIcon,
   RupeeSymbol,
   BexCoin,
- } from '../../IconsImages'
-import ES from '../../ES'
+  RedHeartIcon
+ } from '../pages/IconsImages'
+import ES from '../pages/ES'
+import { useDispatch, useSelector } from 'react-redux'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { addToCart, removeFromCart } from '../../redux/action';
 
 const ProductComponetHorizontal = (props) => {
-  useEffect(()=>{
-    console.log("top discount: ",props.product)
-  },[props.product])
+  const [itemInCart,setItemInCart] = useState(false)
+  const [isProductImages, setIsProductImages] = useState(false)
+  const cart = useSelector(state => state.cart)
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+   // console.log('Product Horizontal thumbnailImage : ', props.product.thumbnailImage.filePath);
+    if(props.product.thumbnailImage.filePath) setIsProductImages(true)
+      if(props.product.thumbnailImage.filePath) setIsProductImages(true)
+        for(let i in cart){
+          if(cart[i]._id == props.product._id){
+            console.log(props.product.name," is in cart")
+            setItemInCart(true)
+          }
+        }
+  }, [props.product]);
+
+  const handleAddToCart = () => {
+    console.log("handleAddToCart called ",props.product._id)
+    dispatch(addToCart(props.product))
+    setItemInCart(true)
+  }
+
+  const handleRemoveFromCart = () => {
+    console.log("handleRemoveFromCart called ",props.product._id)
+    dispatch(removeFromCart(props.product))
+    setItemInCart(false)
+  }
   return (
     <View style={[ ES.w100, ES.fx0, ES.alignItemsCenter]}>
     <View
       style={[
-        ES.bgLightTea,
+      
+        props.color ? { backgroundColor:props.color } : ES.bgLightTea,
         ES.p1,
         ES.bRadius8,
         ES.w92,
-        ES.shadow1, 
+        props.shadow ? { ...ES.shadow1 } : null, 
         ES.flexRow,
         
       ]}>
       <View style={[ES.fx1]}>
-        <Image source={props.product?.image} style={[ES.w100,ES.objectFitCover]} />
+        <View style={[ES.w100,ES.hs120,ES.bRadius8,ES.bgLight,{overflow:'hidden'}]}>
+        <Image source={isProductImages ?{uri:props.product.thumbnailImage.filePath}: {uri:'https://bex-dev-bucket.s3.ap-south-1.amazonaws.com/400x400-image-1686744310296.png'} } style={[ES.w100,ES.h100]} /* style={[ES.w100,ES.objectFitCover]} */ />
+        </View>
       </View>
       <View style={[ES.fx2]}>
         <View style={[ES.fx2, ES.flexRow]}>
-          <View style={[ES.fx8, ES.py06]}>
+          <View style={[ES.fx8, ES.p06]}>
             <View style={[ES.fx3, ES.px1, ES.justifyContentCenter]}>
               <Text style={[ES.textDark, ES.f14, ES.textJustify]}>
-                {props.product?.name}
+              {props.product?.name.length<=27 ? props.product?.name : props.product?.name.slice(0,27)+"..."}
               </Text>
             </View>
             <View style={[ES.fx2, ES.flexRow, ES.px06]}>
               <View style={[ES.fx1, ES.flexRow]}>
                 <View style={[ES.fx1, ES.justifyContentEnd]}>
                   <Text style={[ES.f18, ES.fwM, ES.productTitleColor]}>
-                    {' '}
-                    ₹350
+                  ₹{props.product?.pricing?.offerPrice || "100"}
+                   
                   </Text>
                 </View>
                 <View style={[ES.fx1, ES.justifyContentEnd]}>
@@ -67,8 +99,7 @@ const ProductComponetHorizontal = (props) => {
                       ES.fx0,
                       ES.justifyContentEnd,
                     ]}>
-                    {' '}
-                    ₹500{' '}
+                  <Text>₹{props.product?.pricing?.price || "100"}</Text>
                   </Text>
                 </View>
               </View>
@@ -80,7 +111,7 @@ const ProductComponetHorizontal = (props) => {
                     {color: '#25D366'},
                     ES.fw900,
                   ]}>
-                  50% OFF
+                  {props.product?.pricing?.offerPercentage.toFixed(2) || ""}% OFF
                 </Text>
               </View>
             </View>
@@ -119,7 +150,12 @@ const ProductComponetHorizontal = (props) => {
               <Image source={ShareIcon} />
             </View>
             <View style={[ES.fx2, ES.centerItems]}>
-              <Image source={HeartBlueIcon} />
+              <TouchableOpacity
+                onPress={()=> {itemInCart ? handleRemoveFromCart() : handleAddToCart()}}
+              >
+
+              <Image source={itemInCart ? RedHeartIcon : HeartBlueIcon} style={[{width: 24, height: 24},ES.objectFitContain]} />
+              </TouchableOpacity>
             </View>
             <View style={[ES.fx1, ES.centerItems]}></View>
           </View>

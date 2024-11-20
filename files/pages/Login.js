@@ -117,7 +117,7 @@ export default function Login({route}) {
 
   const varifyIsLoggedIn = async () => {
     const token = await AsyncStorage.getItem('token');
-    console.log('logout : ', token);
+    //console.log('logout : ', token);
 
     if (token) {
       dispatch(toggleLogin(true));

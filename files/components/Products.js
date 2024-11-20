@@ -16,13 +16,13 @@ import {
   HeartIcon,
   RupeeSymbol,
   BexCoin,
-} from '../../IconsImages';
+} from '../pages/IconsImages';
 
-import ES from '../../ES';
+import ES from '../pages/ES';
 
 const Products = props => {
   useEffect(() => {
-    console.log('Product: ', props.product);
+   // console.log('Product: ', props.product);
   }, [props.product]);
 
   return (
