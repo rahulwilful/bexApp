@@ -13,7 +13,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useIsFocused} from '@react-navigation/native';
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
 import bex from '../../assets/Texts/BexGroup.png';
 import ProfileIcons from '../../assets/Texts/ProfileIconsGroup.png';
@@ -48,7 +48,7 @@ import {
   CookingIcon,
   BodyIcon,
   DrinksIcon,
-  HomeIcon,
+  CupIcon,
   HealthIcon,
   SnacksIcon,
   ActiyoLuxuryLogo,
@@ -93,17 +93,25 @@ export default function Home({route}) {
   const tempTopSellers = useSelector(state => state.topSellers);
   const banners = useSelector(state => state.banners);
   const cart = useSelector(state => state.cart);
+  const cartRenderKey = useSelector(state =>state.cartRenderKey)
   const [cartSize, setCartSize] = useState(cart.length);
 
-  const updateRenderKey = () => {
-    console.log('home updateRenderKey renderKey: ', renderKey);
-    setRenderKey(renderKey + 1);
-  };
+  const isFoccused = useIsFocused();
+
+
+
+  useEffect(()=>{
+    if(isFoccused){
+      console.log("refreshed Home: ",renderKey)
+      setRenderKey(renderKey+1)
+
+    }
+  },[isFoccused])
 
   useEffect(() => {
-    updateRenderKey();
-    console.log('home renderKey: ', renderKey);
-  }, [cart]);
+   
+    console.log('home renderKey: ', cartRenderKey);
+  }, [cartRenderKey]);
 
   useEffect(() => {
     let temp = [];
@@ -141,7 +149,7 @@ export default function Home({route}) {
   };
 
   useEffect(() => {
-    console.log(ProductsArray);
+   // console.log(ProductsArray);
 
     setRenderKey(renderKey + 1);
   }, [ProductsArray]);
@@ -299,7 +307,7 @@ export default function Home({route}) {
               </Text>
             </View>
 
-            <View style={[ES.w100]} key={cart.length}>
+            <View style={[ES.w100]} key={renderKey}>
               <FlatList
                 data={showAllTopDeals ? topDeals : topDeals.slice(0, 4)}
                 keyExtractor={(item, index) => index.toString()}
@@ -309,7 +317,7 @@ export default function Home({route}) {
                 renderItem={({item}) => {
                   return (
                     <View style={[ES.m04, {flex: 0.5}]}>
-                      <ProductComponetVertical product={item} />
+                      <ProductComponetVertical  product={item} />
                     </View>
                   );
                 }}
@@ -332,7 +340,7 @@ export default function Home({route}) {
               </Text>
             </View>
 
-            <View style={[ES.w100, ES.fx0, ES.gap1]} key={cart.length}>
+            <View style={[ES.w100, ES.fx0, ES.gap1]} key={renderKey}>
               <FlatList
                 data={showAllNewLaunches ? topDeals : topDeals.slice(0, 3)}
                 contentContainerStyle={[ES.fx0, ES.gap3, ES.pb1]}
@@ -370,7 +378,7 @@ export default function Home({route}) {
                 ES.justifyContentCenter,
                 ES.gap1,
               ]}
-              key={cart.length}>
+              key={renderKey}>
               <FlatList
                 data={showAllTopSellers ? topSellers : topSellers.slice(0, 4)}
                 keyExtractor={(item, index) => index.toString()}
@@ -379,7 +387,7 @@ export default function Home({route}) {
                 renderItem={({item}) => {
                   return (
                     <View style={[ES.m04, {flex: 0.5}]}>
-                      <ProductComponetVertical product={item} />
+                      <ProductComponetVertical  product={item} />
                     </View>
                   );
                 }}
@@ -418,7 +426,8 @@ export default function Home({route}) {
                       ES.gap2,
                       ES.bRadius10,
                       {backgroundColor: '#EBC6AC'},
-                    ]}>
+                    ]}
+                    >
                     <Image source={CookingIcon} />
                     <Text style={[ES.fwM, ES.f18, ES.textDark]}>Cooking</Text>
                   </View>
@@ -474,7 +483,7 @@ export default function Home({route}) {
                       ES.bRadius10,
                       {backgroundColor: '#EBC6AC'},
                     ]}>
-                    <Image source={HomeIcon} />
+                    <Image source={CupIcon} />
                     <Text style={[ES.fwM, ES.f18, ES.textDark]}>Home</Text>
                   </View>
                 </View>
@@ -523,7 +532,7 @@ export default function Home({route}) {
               <View style={[ES.fx0, ES.py1]}>
                 <Text style={[ES.textCenter, ES.subHeadingText]}>COMBOS</Text>
               </View>
-              <View style={[ES.w100]} key={cart.length}>
+              <View style={[ES.w100]} key={renderKey}>
                 <ProductComponetHorizontal
                   product={topDeals[0]}
                   color="#ffffff"
@@ -569,7 +578,7 @@ export default function Home({route}) {
             </View>
 
             <View style={[ES.mt2, ES.w100]}>
-              <View style={[ES.w100, ES.gap2, ES.px04]} key={cart.length}>
+              <View style={[ES.w100, ES.gap2, ES.px04]} key={renderKey}>
                 <FlatList
                   data={topDeals}
                   horizontal
@@ -577,7 +586,7 @@ export default function Home({route}) {
                   contentContainerStyle={[ES.tempBorder]}
                   renderItem={({item}) => (
                     <View style={[ES.ws200, ES.px04]}>
-                      <ProductComponetVertical product={item} />
+                      <ProductComponetVertical  product={item} />
                     </View>
                   )}
                 />

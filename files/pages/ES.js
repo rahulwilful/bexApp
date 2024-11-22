@@ -1083,6 +1083,24 @@ const ES = StyleSheet.create({
   textDark: {
     color: 'black',
   },
+  textDanger: {
+    color: '#dc3545',
+  },
+  textPrimary: {
+    color: '#007bff',
+  },
+  textSuccess: {
+    color: '#28a745',
+  },
+  textInfo: {
+    color: '#17a2b8',
+  },
+  textWarning: {
+    color: '#ffc107',
+  },
+  textSecondary: {
+    color: '#6c757d',
+  },
   /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
   tempBorder:{
     borderWidth: 1,

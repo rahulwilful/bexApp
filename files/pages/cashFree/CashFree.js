@@ -1,35 +1,31 @@
-import {View, Text, Button} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import ES from '../ES';
-import axios from 'axios';
+import React, {useState, useEffect} from 'react';
+import {View, Button, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import axios from 'axios';
 import {
-  cashfreeClientId,
-  cashfreeClientSecret,
-  CF_Client_Id,
-  CF_Client_SECRETE,
-} from '../../../AppConstants';
-
-import {CFEnvironment, CFSession} from 'cashfree-pg-api-contract';
-
-import { WebView } from 'react-native-webview';
-
-const PaymentWebView = ({ paymentLink }) => {
-  return <WebView source={{ uri: paymentLink }} />;
-};
+  CFEnvironment,
+  CFSession,
+  CFPaymentModes,
+  CFPaymentComponentBuilder,
+  CFThemeBuilder,
+  CFDropCheckoutPayment
+} from 'cashfree-pg-api-contract';
+import {
+  CFCallback,
+  CFErrorResponse,
+  CFPaymentGatewayService,
+} from 'react-native-cashfree-pg-sdk';
+import {CF_Client_Id, CF_Client_SECRETE} from '../../../AppConstants';
 
 const CashFree = () => {
   const [orderId, setOrderId] = useState(null);
   const [sessionId, setSessionId] = useState(null);
+  const [paymentLink, setPaymentLink] = useState(null);
 
-  let payment_session_id = null;
-  let order_id = null;
-
-
+  // Create order
   const createOrder = async () => {
-    let tempOrderId2 = 'devstudio_' + new Date().getTime();
-    setOrderId(tempOrderId2);
-    order_id = tempOrderId2;
+    let uniqueOrderId = 'order_' + new Date().getTime();
+    setOrderId(uniqueOrderId);
 
     const url = 'https://sandbox.cashfree.com/pg/orders';
     const headers = {
@@ -41,13 +37,13 @@ const CashFree = () => {
     };
 
     const body = {
-      order_amount: '1',
+      order_amount: '10',
       order_currency: 'INR',
-      order_id: order_id,
+      order_id: uniqueOrderId,
       customer_details: {
-        customer_id: 'node_sdk_test',
-        customer_name: 'rahul',
-        customer_email: 'example@gmail.com',
+        customer_id: 'test_user',
+        customer_name: 'John Doe',
+        customer_email: 'johndoe@example.com',
         customer_phone: '9999999999',
       },
       payment_methods: {
@@ -59,72 +55,146 @@ const CashFree = () => {
 
     try {
       const response = await axios.post(url, body, {headers});
-      console.log('Order Created:', response);
+      console.log('Order Created:', response.data.payment_session_id);
 
       if (response.data.payment_session_id) {
-        console.log('Payment Session ID:', response.data.payment_session_id);
         setSessionId(response.data.payment_session_id);
-        payment_session_id = response.data.payment_session_id;
-        varifySession();
+        setPaymentLink(response.data.payments.url);
+        console.log('Payment Link:', response.data.payments.url);
+        console.log("orderId: ", response.data.order_id);
       } else {
         console.error('Failed to create order:', response.data);
       }
     } catch (error) {
-      console.error('Error creating order:', error);
+      console.error('Error creating order:', error.message);
     }
   };
 
-  const varifySession = async () => {
+  // Verify session
+  const verifySession = async () => {
+    if (!sessionId || !orderId) {
+      console.error('Session ID or Order ID is missing!');
+      return;
+    }
 
-    console.log("varifySession: ",payment_session_id,"  ",order_id)
     try {
-      const session = new CFSession(
-        payment_session_id,
-        order_id,
-        CFEnvironment.SANDBOX,
-      );
-
-      console.log("session: ",session)
-    } catch (e) {
-      console.log(e.message);
+      const session = new CFSession(sessionId, orderId, CFEnvironment.SANDBOX);
+      console.log('Session Verified:', session);
+    } catch (error) {
+      console.error('Error verifying session:', error.message);
     }
   };
 
-  const checkOnlinePayment = async order_id => {
-    axios
-      .get(`https://sandbox.cashfree.com/pg/orders/${order_id}/payments`, {
-        headers: {
-          'x-client-id': CF_Client_Id,
-          'x-client-secret': CF_Client_SECRETE,
-          'x-api-version': '2022-01-01',
-        },
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err.response, 'error');
-      });
+  // Check payment status
+  const checkPaymentStatus = async order_id => {
+    const url = `https://sandbox.cashfree.com/pg/orders/${order_id}/payments`;
+    const headers = {
+      'x-client-id': CF_Client_Id,
+      'x-client-secret': CF_Client_SECRETE,
+      'x-api-version': '2022-01-01',
+    };
+
+    try {
+      const response = await axios.get(url, {headers});
+      console.log('Payment Status:', response.data);
+    } catch (error) {
+      console.error('Error checking payment status:', error.message);
+    }
   };
 
+  // Initiate Payment using Cashfree SDK
+  const initiatePayment = async () => {
+    if (!sessionId || !orderId) {
+      console.error('Session ID or Order ID is missing!');
+      return;
+    }
+
+    const session = new CFSession(
+      sessionId,
+      orderId,
+      CFEnvironment.SANDBOX
+  );
+  const paymentModes = new CFPaymentComponentBuilder()
+      .add(CFPaymentModes.CARD)
+      .add(CFPaymentModes.UPI)
+      .add(CFPaymentModes.NB)
+      // .add(CFPaymentModes.WALLET)
+      // .add(CFPaymentModes.PAY_LATER)
+      .build();
+  const theme = new CFThemeBuilder()
+      .setNavigationBarBackgroundColor('#f20909')
+      .setNavigationBarTextColor('#FFFFFF')
+      .setButtonBackgroundColor('#f209e2')
+      .setButtonTextColor('#FFFFFF')
+      .setPrimaryTextColor('#212121')
+      .setSecondaryTextColor('#757575')
+      .build();
+  const dropPayment = new CFDropCheckoutPayment(
+      session,
+      paymentModes,
+      theme
+  );
+
+  try{
+
+    CFPaymentGatewayService.doPayment(dropPayment);
+  }catch(e){
+    console.log("error: ",e);
+  }
+
+  //setButtonDisabled(false);
+  };
+
+  // Effect hook to setup anything on mount
   useEffect(() => {
-    //createOrder();
+    // Perform initial setup if necessary
   }, []);
 
   return (
-    <View style={[ES.fx1, ES.centerItems, ES.gap3]}>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      {/* Create Order Button */}
       <TouchableOpacity
+        style={{marginBottom: 20}}
         onPress={() => {
           createOrder();
         }}>
-        <Button title="Call Test API" />
-        {/* <Text style={[ES.textDark, ES.f40, ES.fwB]}>Call API</Text> */}
+        <Button title="Create Order" />
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{marginBottom: 20}}
+        onPress={() => {
+          if (orderId) {
+            initiatePayment();
+          } else {
+            console.log('No Order ID available');
+          }
+        }}>
+        <Button title="Make Payment" />
+      </TouchableOpacity>
+
+      {/* Check Payment Status Button */}
+      <TouchableOpacity
+        style={{marginBottom: 20}}
+        onPress={() => {
+          if (orderId) {
+            checkPaymentStatus(orderId);
+          } else {
+            console.log('No Order ID available');
+          }
+        }}>
+        <Button title="Check Payment Status" />
+      </TouchableOpacity>
+
+      {/* Initiate Payment Button */}
+      
+
+      {/* Verify Session */}
       <TouchableOpacity
         onPress={() => {
-          checkOnlinePayment('devstudio_953778876');
+          verifySession();
         }}>
-        <Button title="Check Payment" />
+        <Text style={{color: 'blue', fontSize: 16}}>Open Payment Page</Text>
       </TouchableOpacity>
     </View>
   );

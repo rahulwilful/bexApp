@@ -1,4 +1,4 @@
-package com.awesomeprojectthree;
+  package com.awesomeprojectthree;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

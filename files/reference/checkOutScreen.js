@@ -50,11 +50,9 @@ import {
     CFDropCheckoutPayment
 } from 'cashfree-pg-api-contract';
 import {
-
     CFCallback,
     CFErrorResponse,
     CFPaymentGatewayService,
-    
 } from 'react-native-cashfree-pg-sdk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
@@ -215,12 +213,10 @@ const CheckoutScreen = ({ navigation, route }) => {
     const [logRes, setLogRes] = useState({});
 
     const checkOut = async () => {
-
         setButtonDisabled(true);
         if (Platform.OS === 'android') {
             setLoader(true);
         };
-
         AsyncStorage.setItem('block', String("true"));
         let requestData = {
             "deliveryAddress": defaultAddress._id,
@@ -228,7 +224,6 @@ const CheckoutScreen = ({ navigation, route }) => {
             "onlinePaymentOrderLogId": logRes._id,
             "isCoinsDiscount": CoinUsedFlag
         };
-
         if (cartCount > 0 && params.isPackage === undefined) {
             if (Object.keys(promoCode).length > 0 && codeApply) {
                 requestData.promoCodeId = `${promoCode._id}`;
@@ -250,7 +245,6 @@ const CheckoutScreen = ({ navigation, route }) => {
                 }
                 products.push(data);
             });
-
             requestData.products = products;
             requestData.cartId = cartList._id;
         } else {

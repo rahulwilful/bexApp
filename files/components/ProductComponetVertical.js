@@ -22,19 +22,20 @@ import {
 import ES from '../pages/ES';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../../redux/action';
+import { addToCart, removeFromCart, updateCartRenderKey } from '../../redux/action';
 
 const ProductComponetVertical = props => {
    const [isProductImages, setIsProductImages] = useState(false)
    const [itemInCart,setItemInCart] = useState(false)
    const cart = useSelector(state => state.cart)
+  
    const dispatch = useDispatch();
     useEffect(() => {
         //console.log('Product thumbnailImage : ', props.product.thumbnailImage.filePath);
         if(props.product.thumbnailImage.filePath) setIsProductImages(true)
           for(let i in cart){
             if(cart[i]._id == props.product._id){
-              console.log(props.product.name," is in cart")
+            
               setItemInCart(true)
             }
           }
@@ -46,15 +47,20 @@ const ProductComponetVertical = props => {
 
      
       const handleAddToCart = () => {
-        console.log("handleAddToCart called ",props.product._id)
+       
         dispatch(addToCart(props.product))
+        
         setItemInCart(true)
       }
 
       const handleRemoveFromCart = () => {
-        console.log("handleRemoveFromCart called ",props.product._id)
+       
         dispatch(removeFromCart(props.product))
         setItemInCart(false)
+
+        if(props.renderCart == true )   dispatch(updateCartRenderKey())
+
+      
       }
     
       return (
@@ -151,7 +157,14 @@ const ProductComponetVertical = props => {
                     <Text style={[ES.textGreen]}> 150 </Text>
                   </View>
                 </View>
-              </View>
+                <View
+                  style={[ES.fx1, ES.flexRow, ES.justifyContentCenter, ES.gap1,props.product?.quantity? ES.dBlock:ES.dNone]}>
+                 
+                  <View style={[]}>
+                    <Text style={[ES.textGreen]}>{props.product?.quantity}</Text>
+                  </View>
+                </View>
+              </View> 
             </View>
           </View>
         </View>

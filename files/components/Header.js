@@ -76,7 +76,12 @@ const Header = props => {
               source={BellIcon}
               style={[{width: 23.83, height: 33.83}, ES.objectFitContain]}
             /> */}
-            <TouchableOpacity onPress={() => navigation.navigate('stackCart')}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('TabCart', {
+                  screen: 'stackCart', // Name of the nested screen
+                })
+              }>
               <Image
                 source={BagWhite3Icon}
                 style={[{width: 50.83, height: 50.83}, ES.objectFitContain]}

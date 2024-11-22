@@ -22,10 +22,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addToCart, setBanners, setCategories, setTopDeals, setTopSellers, toggleLogin} from './redux/action';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import axiosClient from './axiosClient';
 import CashFree from './files/pages/cashFree/CashFree';
+import CheckOut from './files/pages/checkOut/CheckOut';
+import { DarkCartIcon, HomeIcon } from './files/pages/IconsImages';
+import PaymentFailure from './files/pages/checkOut/PaymentFailure';
+import PaymentSuccess from './files/pages/checkOut/PaymentSuccess';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -55,7 +60,9 @@ function DrawerNav() {
     <Drawer.Navigator
       screenOptions={{
         headerShown: false,
+       
       }}>
+
       <Drawer.Screen
         name="Main"
         component={TabNav}
@@ -64,6 +71,7 @@ function DrawerNav() {
           title: route.params?.name,
         })}
       />
+
     </Drawer.Navigator>
   );
 }
@@ -71,15 +79,58 @@ function DrawerNav() {
 function TabNav() {
   return (
     <Tab.Navigator
-      initialRouteName="TabCashFree"
+      initialRouteName="TabHome"
       screenOptions={{
         headerShown: false,
+        tabBarActiveTintColor: '#6443AF',
+        
       }}>
-      <Tab.Screen name="TabHome" component={AuthorizedNav} />
 
-     
+      <Tab.Screen
+        name="TabHome"
+        component={Home}
+        options={{
+          title: 'Home',
+          tabBarLabelStyle: {
+            fontSize: 14,
+          },
+          
+          
+          tabBarIcon: ({focused}) => (
+            <Image
+              source={HomeIcon}
+              style={{
+                width: 34,
+                height: 34,
+                tintColor: focused ? '#6443AF' : 'black', 
+              }}
+            />
+          ),
+        }}
+      />
 
-      <Tab.Screen name="TabCashFree" component={CashFree} />
+      <Tab.Screen name="TabCart" component={AuthorizedNav} options={{title: 'Cart', tabBarLabelStyle: {
+            fontSize: 14,
+          },
+          tabBarIcon: ({focused}) => (
+            <Image
+              source={DarkCartIcon}
+              style={{
+                width: 27,
+                height: 27,
+                tintColor: focused ? '#6443AF' : 'black', // Optional: Change color dynamically
+              }}
+            />
+          ),
+         
+      }}
+      />
+
+      
+
+   
+    
+    
     </Tab.Navigator>
   );
 }
@@ -87,7 +138,7 @@ function TabNav() {
 function AuthorizedNav() {
   return (
     <Stack.Navigator
-      initialRouteName="stackHome"
+      initialRouteName="stackCart"
       screenOptions={{
         headerShown: false,
       }}>
@@ -109,6 +160,39 @@ function AuthorizedNav() {
           headerTitle: 'My Cart',
         }}
       />
+
+      <Stack.Screen
+        name="stackCheckOut"
+        options={{
+          headerShown: true,
+          headerTitle: 'Check Out',
+        }}
+        component={CheckOut}
+       
+      />
+
+      <Stack.Screen
+        name="stackPaymentSuccess"
+        options={{
+          headerShown: true,
+          headerTitle: 'Success',
+        }}
+        component={PaymentSuccess}
+       
+      />
+
+      <Stack.Screen
+        name="stackPaymentFailure"
+        options={{
+          headerShown: true,
+          headerTitle: 'Error',
+        }}
+        component={PaymentFailure}
+       
+      />
+
+
+
     </Stack.Navigator>
   );
 }

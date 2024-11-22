@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { reducer,categoryReducer,cartReducer, topDealsReducer, topSellerReducer, bannerReducer } from "./reducer";
+import { reducer,categoryReducer,cartReducer, topDealsReducer, topSellerReducer, bannerReducer, cartRenderKeyReducer } from "./reducer";
 
 export default combineReducers({
     auth:reducer,
@@ -7,5 +7,6 @@ export default combineReducers({
     cart:cartReducer,
     topDeals:topDealsReducer,
     topSellers:topSellerReducer,
-    banners:bannerReducer
+    banners:bannerReducer,
+    cartRenderKey:cartRenderKeyReducer,
 })

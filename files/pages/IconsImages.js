@@ -6,7 +6,7 @@ import playIcon from '../assets/Texts/PlayIcon.png'
 import beverages from '../assets/Icons/beverages.png'
 import body from '../assets/Icons/body.png'
 import health from '../assets/Icons/health.png'
-import home from '../assets/Icons/home.png'
+import cup from '../assets/Icons/cup.png'
 import snacks from '../assets/Icons/snacks.png'
 import cooking from '../assets/Icons/cooking.png'
 import drinksIcon from '../assets/Icons/drinksIcon.png'
@@ -22,6 +22,11 @@ import bexPromiseLg from '../assets/Icons/bexPromiseLg.png'
 import cartIcon from '../assets/Icons/cart.png'
 import redHeartIcon from '../assets/Icons/redHeart.png'
 import bagWhite3 from '../assets/Icons/bagWhite3.png'
+import plusIcon from '../assets/Icons/plus.png'
+import minus from '../assets/Icons/minus.png'
+import trashIcon from '../assets/Icons/trash.png'
+import home from '../assets/Icons/home.png'
+import darkCartIcon from '../assets/Icons/darkCart.png'
 
 import bex from '../assets/Texts/BexGroup.png'
 import ProfileIcons from '../assets/Texts/ProfileIconsGroup.png'
@@ -57,11 +62,15 @@ export const BexCoin = bexCoin
 export const RupeeBagIcon = rupeeBag
 export const BexCoinLgIcon = bexCoinLg
 export const DrinksIcon = drinksIcon
-export const HomeIcon = home
+export const CupIcon = cup
 export const CartIcon = cartIcon
 export const RedHeartIcon = redHeartIcon
 export const BagWhite3Icon = bagWhite3
-
+export const PlusIcon  = plusIcon
+export const MinusIcon = minus
+export const TrashIcon = trashIcon
+export const HomeIcon = home
+export const DarkCartIcon = darkCartIcon
 export const MenuIconSvg = menuSvg
 
 
