@@ -30,6 +30,17 @@ import CheckOut from './files/pages/checkOut/CheckOut';
 import { DarkCartIcon, HomeIcon } from './files/pages/IconsImages';
 import PaymentFailure from './files/pages/checkOut/PaymentFailure';
 import PaymentSuccess from './files/pages/checkOut/PaymentSuccess';
+import ReanimatedExample1 from './files/pages/reanimated/ReanimatedExample1';
+import GrowButton from './files/pages/reanimated/GrowButton';
+import SqureAnimation from './files/pages/reanimated/SqureAnimation';
+import Interpolation from './files/pages/reanimated/Interpolation';
+import Draggable from './files/pages/reanimated/Draggable';
+import AnimatedSearch from './files/pages/reanimated/AnimatedSearch';
+import OnScrollAnimation from './files/pages/reanimated/OnScrollAnimation';
+import ReanimatedCarousel from './files/pages/reanimated/ReanimatedCarousel';
+import AnimatedList from './files/pages/reanimated/AnimatedList';
+import ES from './files/pages/ES';
+import GoogleSignIn from './files/pages/GoogleSignIn/GoogleSignIn';
 
 
 const Drawer = createDrawerNavigator();
@@ -79,7 +90,7 @@ function DrawerNav() {
 function TabNav() {
   return (
     <Tab.Navigator
-      initialRouteName="TabHome"
+      initialRouteName="TabCart"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#6443AF',
@@ -109,23 +120,30 @@ function TabNav() {
         }}
       />
 
+    
+
       <Tab.Screen name="TabCart" component={AuthorizedNav} options={{title: 'Cart', tabBarLabelStyle: {
-            fontSize: 14,
-          },
+        fontSize: 14,
+      },
           tabBarIcon: ({focused}) => (
+           
+
             <Image
               source={DarkCartIcon}
               style={{
                 width: 27,
                 height: 27,
-                tintColor: focused ? '#6443AF' : 'black', // Optional: Change color dynamically
+                tintColor: focused ? '#6443AF' : 'black', 
               }}
-            />
-          ),
-         
-      }}
-      />
+              />
+            
+            ),
+            
+          }}
+          />
 
+          
+      
       
 
    
@@ -138,7 +156,7 @@ function TabNav() {
 function AuthorizedNav() {
   return (
     <Stack.Navigator
-      initialRouteName="stackCart"
+      initialRouteName="StackAnimation"
       screenOptions={{
         headerShown: false,
       }}>
@@ -191,6 +209,28 @@ function AuthorizedNav() {
        
       />
 
+      <Stack.Screen
+        name="stackMaps"
+        options={{
+          headerShown: true,
+          headerTitle: 'Map',
+        }}
+        component={Maps}
+       
+      />
+
+      <Stack.Screen
+        name="StackAnimation"
+        options={{
+          headerShown: true,
+          headerTitle: 'Animation',
+        }}
+        component={GoogleSignIn}
+       
+      />
+
+
+         
 
 
     </Stack.Navigator>

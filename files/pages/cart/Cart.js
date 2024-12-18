@@ -15,6 +15,8 @@ import ES from '../ES';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import OrderDetails from './components/OrderDetails';
 
+
+
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);

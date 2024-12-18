@@ -13,8 +13,10 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch, useSelector} from 'react-redux';
 
+import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
+
 import {useFocusEffect, useIsFocused} from '@react-navigation/native';
-import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useCallback, useEffect, useLayoutEffect, useState ,useRef } from 'react';
 import bex from '../../assets/Texts/BexGroup.png';
 import ProfileIcons from '../../assets/Texts/ProfileIconsGroup.png';
 import PlayIcon from '../../assets/Texts/PlayIcon.png';
@@ -178,8 +180,17 @@ export default function Home({route}) {
   useEffect(() => {
     console.log('home');
   }, []);
+
+  handleScroll = () =>{
+
+    //console.log('Scrolling');
+    
+  }
+
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+    <ScrollView contentContainerStyle={{flexGrow: 1}} 
+     onScroll={handleScroll}
+    >
       <View style={[s.main]} contentContainerStyle={{flexGrow: 1}}>
         <View style={[ES.w100]}>
           <Header handleSearch={handleSearch} />

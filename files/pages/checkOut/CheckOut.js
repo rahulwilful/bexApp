@@ -61,7 +61,7 @@ const CheckOut = () => {
     setTotalPayable(temp + 20);
   }, [cart]);
 
- 
+  
   const createOrder = async () => {
     let uniqueOrderId = 'order_' + new Date().getTime();
     setOrderId(uniqueOrderId);
@@ -148,25 +148,25 @@ const CheckOut = () => {
       console.error('Session ID or Order ID is missing!');
       return;
     }
-  
+    
     const session = new CFSession(sessionId, orderId, CFEnvironment.SANDBOX);
     const paymentModes = new CFPaymentComponentBuilder()
       .add(CFPaymentModes.CARD)
       .add(CFPaymentModes.UPI)
       .add(CFPaymentModes.NB)
       .build();
-  
+    
     const theme = new CFThemeBuilder()
       .setNavigationBarBackgroundColor('#2d2af7')
       .setNavigationBarTextColor('#FFFFFF')
       .setButtonBackgroundColor('#2d2af7')
-      .setButtonTextColor('#FFFFFF')
+      .setButtonTextColor('#FFFFFF')  
       .setPrimaryTextColor('#212121')
       .setSecondaryTextColor('#757575')
       .build();
-  
+
     const dropPayment = new CFDropCheckoutPayment(session, paymentModes, theme);
-  
+    
     try {
       CFPaymentGatewayService.setCallback({
         onVerify: (verifiedOrderId) => {
@@ -188,7 +188,7 @@ const CheckOut = () => {
           navigation.navigate('stackPaymentFailure');
         },
       })
-  
+      
       CFPaymentGatewayService.doPayment(dropPayment);
     } catch (e) {
       console.error('Error during payment initiation:', e.message);
@@ -228,45 +228,12 @@ const CheckOut = () => {
         </TouchableOpacity>
       </View>
 
-      {/*  
-
-       <TouchableOpacity
-          style={{marginBottom: 20}}
-          onPress={() => {
-            if (orderId) {
-              initiatePayment();
-            } else {
-              console.log('No Order ID available');
-            }
-          }}>
-          <Button title="Make Payment" />
-        </TouchableOpacity>
+      
 
       
-        <TouchableOpacity
-          style={{marginBottom: 20}}
-          onPress={() => {
-            if (orderId) {
-              checkPaymentStatus(orderId);
-            } else {
-              console.log('No Order ID available');
-            }
-          }}>
-
-          <Button title="Check Payment Status" />
-
-        </TouchableOpacity>
-
-        */}
-
-      {/*  <TouchableOpacity
-          onPress={() => {
-            verifySession();
-          }}>
-          <Text style={{color: 'blue', fontSize: 16}}>Open Payment Page</Text>
-        </TouchableOpacity> */}
     </View>
   );
 };
 
 export default CheckOut;
+  
